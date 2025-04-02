@@ -1,8 +1,8 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static boolean isIncreasing(int num) {
+        if (num < 10) return false;
         int prevDigit = 10;
         while (num > 0) {
             int currentDigit = num % 10;
@@ -25,21 +25,21 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        ArrayList<Integer> numbers = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите числа, завершите ввод 0:");
-        
-        while (true) {
+        System.out.print("Введите количество чисел: ");
+        int count = scanner.nextInt();
+
+        System.out.println("Введите " + count + " чисел:");
+        boolean firstOutput = true;
+
+        for (int i = 0; i < count; i++) {
             int num = scanner.nextInt();
-            if (num == 0) break;
-            if (num/10) != 0{
-                numbers.add(num);
-            }
-        }
-        
-        for (int num : numbers) {
             if (isIncreasing(num)) {
-                System.out.print(reverseNumber(num) + " ");
+                if (!firstOutput) {
+                    System.out.print(" ");
+                }
+                System.out.print(reverseNumber(num));
+                firstOutput = false;
             }
         }
     }

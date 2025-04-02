@@ -1,5 +1,6 @@
 <?php
 function isIncreasing($num) {
+    if ($num < 10) return false;
     $prevDigit = 10;
     while ($num > 0) {
         $currentDigit = $num % 10;
@@ -21,20 +22,20 @@ function reverseNumber($num) {
     return $reversed;
 }
 
-$numbers = [];
-echo "Введите числа, завершите ввод 0:\n";
+echo "Введите количество чисел: ";
+$count = (int)fgets(STDIN);
 
-while (true) {
+echo "Введите $count чисел:\n";
+$firstOutput = true;
+
+for ($i = 0; $i < $count; $i++) {
     $num = (int)fgets(STDIN);
-    if ($num == 0) break;
-    array_push($numbers, $num);
-}
-
-foreach ($numbers as $num) {
     if (isIncreasing($num)) {
-        echo reverseNumber($num) . " ";
+        if (!$firstOutput) {
+            echo " ";
+        }
+        echo reverseNumber($num);
+        $firstOutput = false;
     }
 }
-
-echo "\n";
 ?>

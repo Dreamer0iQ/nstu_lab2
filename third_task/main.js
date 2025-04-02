@@ -1,7 +1,5 @@
-// Функция проверки возрастания цифр
 function isIncreasing(num) {
-    if (num < 10) return false; // Исключаем однозначные числа
-    
+    if (num < 10) return false;
     let prevDigit = 10;
     while (num > 0) {
         const currentDigit = num % 10;
@@ -14,7 +12,6 @@ function isIncreasing(num) {
     return true;
 }
 
-// Функция переворота числа
 function reverseNumber(num) {
     let reversed = 0;
     while (num > 0) {
@@ -24,26 +21,19 @@ function reverseNumber(num) {
     return reversed;
 }
 
-// Основная программа
-const countInput = prompt("Введите количество чисел:");
-const count = parseInt(countInput);
+const count = parseInt(prompt("Введите количество чисел:"));
+let output = "";
+let firstOutput = true;
 
-if (isNaN(count)) {
-    alert("Ошибка: введите число!");
-} else {
-    let foundNumbers = false;
-    
-    for (let i = 0; i < count; i++) {
-        const numInput = prompt(`Введите число ${i + 1} из ${count}:`);
-        const num = parseInt(numInput);
-        
-        if (!isNaN(num) && isIncreasing(num)) {
-            console.log(`${reverseNumber(num)}`);
-            foundNumbers = true;
+for (let i = 0; i < count; i++) {
+    const num = parseInt(prompt(`Введите число ${i + 1} из ${count}:`));
+    if (isIncreasing(num)) {
+        if (!firstOutput) {
+            output += " ";
         }
-    }
-    
-    if (!foundNumbers) {
-        alert("Нет подходящих чисел");
+        output += reverseNumber(num);
+        firstOutput = false;
     }
 }
+
+console.log(output);

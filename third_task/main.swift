@@ -1,4 +1,5 @@
 func isIncreasing(_ num: Int) -> Bool {
+    if num < 10 { return false }
     var n = num
     var prevDigit = 10
     while n > 0 {
@@ -22,19 +23,23 @@ func reverseNumber(_ num: Int) -> Int {
     return reversed
 }
 
-var numbers: [Int] = []
-print("Введите числа, завершите ввод 0:")
-
-while true {
-    guard let input = readLine(), let num = Int(input) else { continue }
-    if num == 0 { break }
-    if Int(num/10) != 0 {
-        numbers.append(num)   
-    }
+print("Введите количество чисел:")
+guard let countInput = readLine(), let count = Int(countInput) else {
+    fatalError("Ошибка ввода количества чисел")
 }
 
-for num in numbers {
+print("Введите \(count) чисел:")
+var firstOutput = true
+
+for _ in 0..<count {
+    guard let numInput = readLine(), let num = Int(numInput) else {
+        continue
+    }
     if isIncreasing(num) {
-        print("\(reverseNumber(num)) ", terminator: "")
+        if !firstOutput {
+            print(" ", terminator: "")
+        }
+        print(reverseNumber(num), terminator: "")
+        firstOutput = false
     }
 }

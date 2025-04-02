@@ -1,38 +1,35 @@
 def is_increasing(num)
-    prev_digit = 10
-    while num > 0
-      current_digit = num % 10
-      if current_digit >= prev_digit
-        return false
-      end
-      prev_digit = current_digit
-      num /= 10
-    end
-    true
+  return false if num < 10
+  prev_digit = 10
+  while num > 0
+    current_digit = num % 10
+    return false if current_digit >= prev_digit
+    prev_digit = current_digit
+    num /= 10
   end
-  
-  def reverse_number(num)
-    reversed = 0
-    while num > 0
-      reversed = reversed * 10 + num % 10
-      num /= 10
-    end
-    reversed
+  true
+end
+
+def reverse_number(num)
+  reversed = 0
+  while num > 0
+    reversed = reversed * 10 + num % 10
+    num /= 10
   end
-  
-  numbers = []
-  puts "Введите числа, завершите ввод 0:"
-  
-  loop do
-    num = gets.chomp.to_i
-    break if num == 0
-    if num / 10 != 0
-      numbers << num
-    end
+  reversed
+end
+
+print "Введите количество чисел: "
+count = gets.chomp.to_i
+
+puts "Введите #{count} чисел:"
+first_output = true
+
+count.times do
+  num = gets.chomp.to_i
+  if is_increasing(num)
+    print " " unless first_output
+    print reverse_number(num)
+    first_output = false
   end
-  
-  numbers.each do |num|
-    if is_increasing(num)
-      print "#{reverse_number(num)} "
-    end
-  end
+end

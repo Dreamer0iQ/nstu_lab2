@@ -1,4 +1,6 @@
 def is_increasing(num):
+    if num < 10:
+        return False
     prev_digit = 10
     while num > 0:
         current_digit = num % 10
@@ -15,15 +17,14 @@ def reverse_number(num):
         num = num // 10
     return reversed_num
 
-numbers = []
-print("Введите числа, завершите ввод 0:")
+count = int(input("Введите количество чисел: "))
+print(f"Введите {count} чисел:")
 
-while True:
+first_output = True
+for _ in range(count):
     num = int(input())
-    if num == 0:
-        break
-    numbers.append(num)
-
-for num in numbers:
     if is_increasing(num):
-        print(reverse_number(num), end=" ")
+        if not first_output:
+            print(" ", end="")
+        print(reverse_number(num), end="")
+        first_output = False

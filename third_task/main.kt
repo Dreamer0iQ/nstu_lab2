@@ -1,4 +1,5 @@
 fun isIncreasing(num: Int): Boolean {
+    if (num < 10) return false
     var n = num
     var prevDigit = 10
     while (n > 0) {
@@ -23,18 +24,20 @@ fun reverseNumber(num: Int): Int {
 }
 
 fun main() {
-    val numbers = mutableListOf<Int>()
-    println("Введите числа, завершите ввод 0:")
-    
-    while (true) {
+    print("Введите количество чисел: ")
+    val count = readLine()!!.toInt()
+
+    println("Введите $count чисел:")
+    var firstOutput = true
+
+    for (i in 0 until count) {
         val num = readLine()!!.toInt()
-        if (num == 0) break
-        numbers.add(num)
-    }
-    
-    for (num in numbers) {
         if (isIncreasing(num)) {
-            print("${reverseNumber(num)} ")
+            if (!firstOutput) {
+                print(" ")
+            }
+            print(reverseNumber(num))
+            firstOutput = false
         }
     }
 }

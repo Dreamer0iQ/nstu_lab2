@@ -1,10 +1,11 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func isIncreasing(num int) bool {
+	if num < 10 {
+		return false
+	}
 	prevDigit := 10
 	for num > 0 {
 		currentDigit := num % 10
@@ -27,23 +28,22 @@ func reverseNumber(num int) int {
 }
 
 func main() {
-	var numbers []int
-	var num int
-	fmt.Println("Введите числа, завершите ввод 0:")
+	var count int
+	fmt.Print("Введите количество чисел: ")
+	fmt.Scan(&count)
 
-	for {
+	fmt.Printf("Введите %d чисел:\n", count)
+	firstOutput := true
+
+	for i := 0; i < count; i++ {
+		var num int
 		fmt.Scan(&num)
-		if num == 0 {
-			break
-		}
-		if (int(num / 10)) != 0 {
-			numbers = append(numbers, num)
-		}
-	}
-
-	for _, num := range numbers {
 		if isIncreasing(num) {
-			fmt.Printf("%d ", reverseNumber(num))
+			if !firstOutput {
+				fmt.Print(" ")
+			}
+			fmt.Print(reverseNumber(num))
+			firstOutput = false
 		}
 	}
 }

@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
     static bool IsIncreasing(int num)
     {
+        if (num < 10) return false;
         int prevDigit = 10;
         while (num > 0)
         {
@@ -30,25 +30,22 @@ class Program
 
     static void Main()
     {
-        List<int> numbers = new List<int>();
-        Console.WriteLine("Введите числа, завершите ввод 0:");
+        Console.Write("Введите количество чисел: ");
+        int count = int.Parse(Console.ReadLine());
 
-        while (true)
-        {
-            string input = Console.ReadLine();
-            if (int.TryParse(input, out int num))
-            {
-                if (num == 0)
-                    break;
-                numbers.Add(num);
-            }
-        }
+        Console.WriteLine($"Введите {count} чисел:");
+        bool firstOutput = true;
 
-        Console.Write("Результат: ");
-        foreach (int num in numbers)
+        for (int i = 0; i < count; i++)
         {
+            int num = int.Parse(Console.ReadLine());
             if (IsIncreasing(num))
-                Console.Write(ReverseNumber(num) + " ");
+            {
+                if (!firstOutput)
+                    Console.Write(" ");
+                Console.Write(ReverseNumber(num));
+                firstOutput = false;
+            }
         }
     }
 }
